@@ -60,7 +60,7 @@ public class main {
         System.out.println("I own " + turtleCount + " " + pluralize("turtle", turtleCount) + ".");
         flipNHeads(1);
         flipNHeads(2);
-        //clock();
+        clock();
 
     }
 
