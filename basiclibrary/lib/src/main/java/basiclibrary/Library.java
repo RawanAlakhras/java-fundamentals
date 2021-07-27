@@ -3,7 +3,11 @@
  */
 package basiclibrary;
 
+import java.sql.SQLOutput;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
+import java.util.*;
 
 public class Library {
     public boolean someLibraryMethod() {
@@ -61,6 +65,64 @@ public class Library {
         }
         return arr[index];
     }
+    public static int analyzingWeatherData(int [][]arr){
+        int min=arr[0][0];
+        int max=arr[0][0];
+        Set <Integer> temperaturesSet=new HashSet<>();
+        for(int i=0;i<arr.length;i++){
+            for(int r=0; r<arr[i].length ;r++){
+                temperaturesSet.add(arr[i][r]);
+                if(arr[i][r] < min){
+                    min =arr[i][r];
+                }
+                if(arr[i][r] >max ){
+                    max=arr[i][r];
+                }
+            }
+        }
+        System.out.println("High: "+max);
+        System.out.println("Low: "+min);
+        List<Integer> sortedlist = new ArrayList<Integer>(temperaturesSet);
+        Collections.sort(sortedlist);
+        for (int i=min ;i<=max;i++){
+            if(!sortedlist.contains(i)){
+                System.out.println("Never saw temperature: "+i);
+            }
+        }
+        return min;
+
+    }
+    public static String tally(List<String> votes){
+       HashMap <String,Integer> counter=new HashMap<String,Integer>();
+       /*
+       for(String v:votes){
+           System.out.println(v);
+       }
+
+        */
+       for (String vote: votes){
+           if(counter.containsKey(vote)){
+
+              counter.replace(vote,counter.get(vote),counter.get(vote)+1) ;
+          }
+           else{
+               counter.put(vote, 1);
+           }
+
+       }
+        int maxValue = (Collections.max(counter.values()));
+        for (Map.Entry <String,Integer> entry :counter.entrySet()){
+                if(entry.getValue() ==maxValue){
+                   return (entry.getKey());
+
+                }
+        }
+        return "error";
+       // for( Map.Entry<String, Integer> entry : counter.entrySet() ){
+       //     System.out.println( entry.getKey() + " => " + entry.getValue() );
+        //}
+
+    }
     public static void main(String[] args) {
      int arr[]=roll(4);
      for (int i=0;i<arr.length;i++){
@@ -79,6 +141,21 @@ public class Library {
         for (int i =0;i<lowestAverage.length ;i++){
             System.out.println(lowestAverage[i]);
         }
+        analyzingWeatherData(weeklyMonthTemperatures);
+        List<String> votes = new ArrayList<>();
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Bush");
+        votes.add("Shrub");
+        votes.add("Hedge");
+        votes.add("Shrub");
+        votes.add("Bush");
+        votes.add("Hedge");
+        votes.add("Bush");
+
+        String winner = tally(votes);
+        System.out.println(winner + " received the most votes!");
+
 
     }
 }
