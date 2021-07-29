@@ -23,15 +23,16 @@ public class Library {
         return diceArray;
     }
     public static boolean containsDuplicates(int arr[]){
-        int cumulativeSum[]=new int[7];
+        HashSet<Integer> set=new HashSet();
+        //int cumulativeSum[]=new int[7];
         for (int i=0;i<arr.length ;i++){
-            cumulativeSum[arr[i]]++;
-        }
-        for (int i=0 ;i<cumulativeSum.length;i++){
-            if(cumulativeSum[i] >1){
+            if(set.contains(arr[i])){
                 return true;
+            }else{
+               set.add(arr[i]);
             }
         }
+
         return false;
     }
     public static double calculatAverage(int arr[]){
@@ -128,7 +129,8 @@ public class Library {
      for (int i=0;i<arr.length;i++){
          System.out.println(arr[i]);
      }
-     System.out.println(containsDuplicates(arr));
+     int arr2[]={1,2,3,4,5};
+     System.out.println(containsDuplicates(arr2));
      System.out.println("the Average of array = "+calculatAverage(arr));
         int[][] weeklyMonthTemperatures = {
                 {66, 64, 58, 65, 71, 57, 60},
