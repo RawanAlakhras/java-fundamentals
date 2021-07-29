@@ -5,9 +5,8 @@ package linter;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +15,8 @@ class AppTest {
         App classUnderTest = new App();
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
     }
-    @Test void noErrors() throws IOException {
+    @org.junit.Test
+    void noErrors() throws IOException {
         String path = "C:\\Users\\user\\LTUC\\java-fundamentals\\linter\\app\\src\\test\\resources\\noerror.js";
         assertEquals(0,App.readFile(path),"file with no error ");
     }
@@ -25,7 +25,8 @@ class AppTest {
         assertEquals(1,App.readFile(path),"file that contains one error.");
     }
     @Test void fewErrors() throws IOException{
-        String path="C:\\Users\\user\\LTUC\\java-fundamentals\\linter\\app\\src\\test\\resources\\fewErrors.js";
+        String path= "C:\\Users\\user\\LTUC\\java-fundamentals\\linter\\app\\src\\test\\resources\\fewErrors.js";
+
         assertEquals(3,App.readFile(path),"file that contains few error.");
     }
     @Test void manyErrors() throws IOException{
