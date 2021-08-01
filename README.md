@@ -22,3 +22,10 @@
 * Don’t show an error if the line ends with an opening curly brace {
 * Don’t show an error if the line ends with an closing curly brace }
 * Don’t show an error if the line contains if or else
+
+# Composition and Inheritance
+
+* create classes and interfaces to represent reviews of restaurants.
+* Create a class to represent a Restaurant
+* Each Restaurant should have a name, a number of stars betweeen 0 and 5, and a price category.
+* Create a class to represent a Review. Each Review should have a body, an author, and a number of stars.
