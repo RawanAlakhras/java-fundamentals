@@ -10,10 +10,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class LibraryTest {
     Restaurant r1;
     Review r2;
+    Shop shop1;
+    Theater theater1;
 
     @BeforeEach public void inti(){
         r1=new Restaurant("Restaurant 1",1);
         r2=new Review("the best","rawan alakhras",5);
+        shop1=new Shop("shop1","pet shop",5);
+        theater1=new Theater("theater1");
+
+    }
+    //Test Constructor for all class
+    @Test public void testShopConstructor(){
+        assertNotNull(shop1);
+    }
+    @Test public void testTheaterConstructor(){
+        assertNotNull(theater1);
     }
     @Test public void testRestaurantConstructor(){
         assertNotNull(r1);
@@ -26,24 +38,66 @@ class LibraryTest {
         Library classUnderTest = new Library();
         assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
     }
-    @Test void testRestaurantToString(){
 
+
+    //Test tostring method for all class
+    @Test void testShopToString(){
+        String str=shop1.tostring();
+        assertEquals("{name:"+"shop1"+",description:"+"pet shop"+",number of dollar signs:"+5+"}",str);
+    }
+    @Test void testTheaterToString(){
+        String str=theater1.tostring();
+        assertEquals("Theater name:"+"theater1"+"\n",str);
+    }
+    @Test void testRestaurantToString(){
         String str = r1.tostring();
         assertEquals("the name of Restaurant is:"+"Restaurant 1"+
         "\nthe number of stars is :"+0+
                 "\nprice category:"+1.0+"\nThe Review details\n",str);
 
     }
-
     @Test void  testReviewTostring(){
-
         String str=r2.tostring();
         assertEquals("the author is:"+"rawan alakhras"+
         "\nthe body of review :"+"the best\n"+
                 "number Of Stars :"+5,str);
+    }
+
+
+    //Test addReview() for all class
+
+    @Test void testShopAddReview(){
+        shop1.addReview(r2.body, r2.author,r2.stars);
+        shop1.addReview("so beautifull","rawan",5);
+        assertEquals(2,shop1.reviewsArr.size());
+    }
+
+    //Test Theater functionality
+
+    @Test void testTheaterFunctionality(){
+        //test add movie method
+        theater1.addMovie("The godfather");
+        assertTrue(theater1.movie.size()>0);
+
+
+        //test remove movie method
+        theater1.removeMovie("The godfather");
+        assertTrue(theater1.movie.size() == 0);
+
+        //test add review
+        theater1.addReview(r2.body, r2.author, r2.stars);
+        assertEquals(1,theater1.reviewMovie.size());
+
+        //test add review to specific movie
+        theater1.addMovie("The godfather");
+        theater1.addReview(r2.body, r2.author, r2.stars,"The godfather");
+        assertEquals(2,theater1.reviewMovie.size());
+
+
 
     }
-    @Test void testAddReview(){
+
+    @Test void testRestaurantAddReview(){
         r1.addReview(r2.body,r2.author,r2.stars);
         int size=r1.addReview("bad","rawan",0);
         //test number of review in a resturant
